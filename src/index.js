@@ -12,7 +12,7 @@ export default class WebpackWatchPlugin {
     this.files = files
     this.verbose = !!verbose
     this.globOptions = {
-      absolute:true,
+      absolute: true,
       ...globOptions
     }
 
@@ -50,6 +50,6 @@ export default class WebpackWatchPlugin {
 
       this.filesAlreadyAdded = true
       callback()
-    });
+    })
   }
 }

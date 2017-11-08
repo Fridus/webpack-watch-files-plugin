@@ -1,1 +1,4 @@
-./src
+src
+test
+.*
+mocha.opts
