@@ -1,0 +1,32 @@
+{
+  "name": "webpack-watch-files-plugin",
+  "version": "0.0.1",
+  "description": "Webpack watch files",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "npm run build:watch",
+    "build": "babel ./src -d ./lib",
+    "build:watch": "babel ./src -wd ./lib",
+    "lint": "standard",
+    "test": "mocha --compilers js:babel-core/register {test,src}/**/*.spec.js",
+    "test:watch": " mocha --watch --compilers js:babel-core/register {test,src}/**/*.spec.js",
+    "prepublish": "npm run build"
+  },
+  "author": "Florent Detry <florent@fdetry.be> (http://fdetry.be/)",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^7.1.2",
+    "lodash": "^4.17.4"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
