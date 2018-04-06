@@ -7,7 +7,7 @@ import webpackConfig from '../test/webpack.config'
 import path from 'path'
 
 describe('Webpack watch file', () => {
-  it('Should say ok', (done) => {
+  it('Should has files in fileDependencies', (done) => {
     const plugin = new WatchExternalFilesPlugin({
       files: [
         './test/*.include.js',
@@ -22,7 +22,13 @@ describe('Webpack watch file', () => {
         throw err
       }
 
-      const files = stats.compilation.fileDependencies
+      let files = []
+      if (Array.isArray(stats.compilation.fileDependencies)) {
+        files = stats.compilation.fileDependencies
+      } else {
+        stats.compilation.fileDependencies.forEach((value) => files.push(value))
+      }
+
       expect(files)
         .to.be.an('array')
         .that.includes(path.join(process.cwd(), './test/file.include.js'))
