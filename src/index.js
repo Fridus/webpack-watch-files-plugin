@@ -46,7 +46,11 @@ export default class WebpackWatchPlugin {
         console.log('Additional files watched : ', JSON.stringify(files, null, 2))
       }
 
-      files.map(file => compilation.fileDependencies.push(file))
+      if (Array.isArray(compilation.fileDependencies)) {
+        files.map(file => compilation.fileDependencies.push(file))
+      } else {
+        files.map(file => compilation.fileDependencies.add(file))
+      }
 
       this.filesAlreadyAdded = true
       callback()
