@@ -4,7 +4,8 @@
 [![Build Status](https://travis-ci.org/Fridus/webpack-watch-files-plugin.svg?branch=master)](https://travis-ci.org/Fridus/webpack-watch-files-plugin)
 
 Webpack watch additional files. This plugin can trigger a build when these files change.
-Le livereload sera déclenché si vous l'utilisez mais ne fonctionne pas avec HRM
+
+The livereload will be triggered if you use it but does not work with HRM.
 
 ## Installation
 
