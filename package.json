@@ -1,6 +1,6 @@
 {
   "name": "webpack-watch-files-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Webpack watch files",
   "main": "lib/index.js",
   "scripts": {
