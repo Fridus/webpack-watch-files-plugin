@@ -20,7 +20,12 @@ export default class WebpackWatchPlugin {
   }
 
   apply (compiler) {
-    compiler.plugin('after-compile', (compilation, callback) => {
+    // webpack 4 hooks
+    (
+      compiler.hooks
+        ? compiler.hooks.afterCompile.tapAsync.bind(compiler.hooks.afterCompile, 'WebpackWatchPlugin')
+        : compiler.plugin.bind(compiler, 'after-compile')
+    )((compilation, callback) => {
       const filesFound = []
       const filesFoundToEclude = []
       this.files.map(pattern => {
