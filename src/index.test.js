@@ -6,6 +6,8 @@ import WatchExternalFilesPlugin from './index'
 import webpackConfig from '../test/webpack.config'
 import path from 'path'
 
+process.traceDeprecation = true
+
 describe('Webpack watch file', () => {
   it('Should has files in fileDependencies', (done) => {
     const plugin = new WatchExternalFilesPlugin({
@@ -16,7 +18,7 @@ describe('Webpack watch file', () => {
     })
 
     const compiler = webpack(webpackConfig)
-    compiler.apply(plugin)
+    plugin.apply(compiler)
     compiler.run(function (err, stats) {
       if (err) {
         throw err
