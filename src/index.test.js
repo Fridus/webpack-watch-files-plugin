@@ -5,6 +5,7 @@ import webpack from 'webpack'
 import WatchExternalFilesPlugin from './index'
 import webpackConfig from '../test/webpack.config'
 import path from 'path'
+import fs from 'fs'
 
 process.traceDeprecation = true
 
@@ -37,5 +38,47 @@ describe('Webpack watch file', () => {
         .that.not.includes(path.join(process.cwd(), './test/file.exclude.js'))
       done()
     })
+  })
+
+  it('Should trig a compilation', (done) => {
+    fs.writeFileSync(path.join(__dirname, '../test/output/a.txt'), 'hello')
+    const plugin = new WatchExternalFilesPlugin({
+      files: [
+        './test/**/*.txt'
+      ]
+    })
+
+    const compiler = webpack(webpackConfig)
+    const compile = (compiler.hooks
+      ? compiler.hooks.compile.tap.bind(compiler.hooks.compile, 'WatchExternalFilesPlugin')
+      : compiler.plugin.bind(compiler, 'compile')
+    )
+
+    let compileCount = 0
+
+    compile((params) => {
+      compileCount++
+    })
+
+    plugin.apply(compiler)
+
+    const watcher = compiler.watch({
+      aggregateTimeout: 500,
+      poll: 200
+    }, (err, stats) => {
+      if (err) {
+        throw err
+      }
+    })
+
+    expect(compileCount).to.be.equal(1)
+    fs.writeFileSync(path.join(__dirname, '../test/output/a.txt'), 'hello world')
+
+    setTimeout(() => {
+      watcher.close(() => {
+        expect(compileCount).to.be.equal(2)
+        done()
+      })
+    }, 1000)
   })
 })
