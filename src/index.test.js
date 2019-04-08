@@ -1,6 +1,6 @@
 /* global describe, it */
 
-import { expect } from 'chai'
+import { expect, assert } from 'chai'
 import webpack from 'webpack'
 import WatchExternalFilesPlugin from './index'
 import webpackConfig from '../test/webpack.config'
@@ -76,9 +76,9 @@ describe('Webpack watch file', () => {
 
     setTimeout(() => {
       watcher.close(() => {
-        expect(compileCount).to.be.equal(2)
+        assert(compileCount >= 2, 'No compilation catched')
         done()
       })
-    }, 1000)
+    }, 2500)
   })
 })

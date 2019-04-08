@@ -1,2 +1,3 @@
 --require babel-core/register
+--timeout 5000
 --exit
