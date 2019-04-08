@@ -2,6 +2,7 @@
 import glob from 'glob'
 import compact from 'lodash/compact'
 import uniq from 'lodash/uniq'
+import { resolve as resolvePath } from 'path'
 
 export default class WebpackWatchPlugin {
   constructor ({
@@ -46,6 +47,7 @@ export default class WebpackWatchPlugin {
           return file
         })
       ))
+        .map(file => resolvePath(file))
 
       if (this.verbose && !this.filesAlreadyAdded) {
         console.log('Additional files watched : ', JSON.stringify(files, null, 2))
