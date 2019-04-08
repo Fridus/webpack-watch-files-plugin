@@ -8,8 +8,8 @@
     "build": "babel ./src -d ./lib",
     "build:watch": "babel ./src -wd ./lib",
     "lint": "standard",
-    "mocha": "NODE_ENV=test mocha --opts mocha.opts 'src/**/*.test.js'",
-    "mocha:watch": "NODE_ENV=test mocha --opts mocha.opts --watch 'src/**/*.test.js'",
+    "mocha": "mocha --opts mocha.opts 'src/**/*.test.js'",
+    "mocha:watch": "mocha --opts mocha.opts --watch 'src/**/*.test.js'",
     "test": "npm run lint && npm run mocha",
     "test:watch": "npm run lint && npm run mocha:watch",
     "prepublish": "npm run build"
