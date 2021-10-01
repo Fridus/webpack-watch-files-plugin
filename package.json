@@ -37,6 +37,6 @@
     "webpack": "^4.44.1"
   },
   "peerDependencies": {
-    "webpack": "^3 || ^4"
+    "webpack": "^3 || ^4 || ^5"
   }
 }
