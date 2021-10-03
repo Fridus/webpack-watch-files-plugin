@@ -6,6 +6,7 @@ import WatchExternalFilesPlugin from './index'
 import webpackConfig from '../test/webpack.config'
 import path from 'path'
 import fs from 'fs'
+import compareVersions from 'compare-versions'
 
 process.traceDeprecation = true
 
@@ -71,7 +72,10 @@ describe('Webpack watch file', () => {
       }
     })
 
-    expect(compileCount).to.be.equal(1)
+    if (!webpack.version || compareVersions(webpack.version, '5') < 0) {
+      expect(compileCount).to.be.equal(1)
+    }
+
     fs.writeFileSync(path.join(__dirname, '../test/output/a.txt'), 'hello world')
 
     setTimeout(() => {

@@ -7,6 +7,7 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x, 14.x, 15.x, 16.x]
+        webpack-version: [3, 4, 5]
 
     steps:
       - uses: actions/checkout@v1
@@ -15,6 +16,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - run: npm install webpack@${{ matrix.webpack-version }}
       - run: npm test
         env:
           CI: true
