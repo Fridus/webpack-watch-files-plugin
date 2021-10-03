@@ -29,7 +29,7 @@ export default class WebpackWatchPlugin {
     )((compilation, callback) => {
       const filesFound = []
       const filesFoundToEclude = []
-      this.files.map(pattern => {
+      for (const pattern of this.files) {
         if (pattern.substr(0, 1) !== '!') {
           glob.sync(pattern, this.globOptions)
             .map(file => filesFound.push(file))
@@ -37,12 +37,12 @@ export default class WebpackWatchPlugin {
           glob.sync(pattern.substr(1), this.globOptions)
             .map(file => filesFoundToEclude.push(file))
         }
-      })
+      }
 
       const files = uniq(compact(
         filesFound.map(file => {
           if (~filesFoundToEclude.indexOf(file)) {
-            return
+            return null
           }
           return file
         })
